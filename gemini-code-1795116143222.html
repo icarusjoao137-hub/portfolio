@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icaro João Dutra Ferreira — Portfólio Profissional</title>
+
+  <style>
+    :root {
+      --fundo: #09090b;
+      --superficie: rgba(18, 18, 22, 0.88);
+      --superficie-alta: rgba(28, 28, 34, 0.94);
+      --texto: #f4f4f5;
+      --texto-suave: #c4c4cc;
+      --vermelho: #ff0015;
+      --vermelho-escuro: #8f000c;
+      --cinza-aco: rgba(255, 255, 255, 0.14);
+      --destaque-suave: rgba(255, 0, 21, 0.16);
+      --largura: 1020px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background-color: var(--fundo);
+      color: var(--texto);
+      line-height: 1.65;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Imagem de fundo em ecrã inteiro */
+    .fundo-imagem-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background-color: var(--fundo);
+    }
+
+    .fundo-imagem {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter: contrast(1.12) saturate(1.25) brightness(0.62);
+    }
+
+    .fundo-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(255, 0, 21, 0.2), transparent 45%),
+        linear-gradient(180deg, rgba(9, 9, 11, 0.72) 0%, rgba(9, 9, 11, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--largura);
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+
+    /* Barra superior fixa */
+    .topo {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: rgba(9, 9, 11, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--cinza-aco);
+    }
+
+    .topo-inner {
+      max-width: var(--largura);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.86rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--texto);
+    }
+
+    .nav-acessos {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .acesso-btn {
+      padding: 7px 14px;
+      border-radius: 2px;
+      border: 1px solid var(--vermelho-escuro);
+      background-color: var(--destaque-suave);
+      color: var(--texto);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .acesso-btn:hover,
+    .acesso-btn.ativo {
+      background-color: var(--vermelho);
+      border-color: var(--vermelho);
+      color: #ffffff;
+    }
+
+    /* Apresentação principal (Hero) */
+    .hero {
+      padding: 54px 0 32px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .tag-pesada {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--vermelho);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.1rem, 4.6vw, 3.35rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      color: var(--vermelho);
+      display: inline-block;
+      text-shadow: 0 0 24px rgba(255, 0, 21, 0.45);
+    }
+
+    .subtitulo-hero {
+      margin: 0 0 24px;
+      font-size: 1.04rem;
+      color: var(--texto-suave);
+      max-width: 520px;
+    }
+
+    .subtitulo-hero strong {
+      color: var(--texto);
+      font-weight: 700;
+    }
+
+    .grupo-botoes-hero {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1.5px solid var(--vermelho);
+      border-radius: 2px;
+      color: var(--texto);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(255, 0, 21, 0.14);
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--vermelho);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Rosto interativo */
+    .ilustracao-box {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 290px;
+    }
+
+    .faixa-fundo {
+      position: absolute;
+      width: 88%;
+      height: 150px;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 0, 21, 0.24),
+        rgba(255, 0, 21, 0.24) 4px,
+        transparent 4px,
+        transparent 11px
+      );
+      border-top: 1px solid rgba(255, 0, 21, 0.55);
+      border-bottom: 1px solid rgba(255, 0, 21, 0.55);
+      z-index: 0;
+    }
+
+    .avatar-svg {
+      position: relative;
+      z-index: 1;
+      width: 230px;
+      height: auto;
+      cursor: pointer;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.85));
+    }
+
+    #cabeca-grupo {
+      transform-origin: 115px 115px;
+      transition: transform 0.14s ease-out;
+    }
+
+    .legenda-rosto {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--texto-suave);
+      margin-top: 8px;
+      letter-spacing: 0.06em;
+    }
+
+    .coluna-avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Painel de acessos interativos */
+    .painel-acessos {
+      margin-top: 18px;
+      background-color: var(--superficie);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--cinza-aco);
+      border-left: 3px solid var(--vermelho);
+      border-radius: 3px;
+      padding: 24px;
+    }
+
+    .abas-acesso {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--cinza-aco);
+    }
+
+    .conteudo-aba {
+      display: none;
+    }
+
+    .conteudo-aba.ativa {
+      display: block;
+    }
+
+    .conteudo-aba h2 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--texto);
+    }
+
+    .conteudo-aba h2::before {
+      content: "// ";
+      color: var(--vermelho);
+    }
+
+    .conteudo-aba p {
+      margin: 0;
+      color: var(--texto-suave);
+      font-size: 0.98rem;
+    }
+
+    /* Secções completas abaixo */
+    section.secao {
+      padding: 44px 0;
+      border-top: 1px solid var(--cinza-aco);
+    }
+
+    h2.titulo-secao {
+      margin: 0 0 14px;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      line-height: 1.1;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h2.titulo-secao::before {
+      content: "// ";
+      color: var(--vermelho);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background-color: var(--superficie);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--cinza-aco);
+      border-left: 3px solid var(--vermelho);
+      border-radius: 3px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--vermelho);
+    }
+
+    .card p {
+      margin: 0 0 8px;
+      font-size: 0.94rem;
+      color: var(--texto-suave);
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--cinza-aco);
+      padding: 24px 0 36px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--texto-suave);
+      background-color: rgba(9, 9, 11, 0.78);
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .coluna-avatar {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- IMAGEM DE FUNDO -->
+  <div class="fundo-imagem-wrapper" aria-hidden="true">
+    <!-- MANTÉM slipknot_icon_png (256×256)_5.jpg NA MESMA PASTA DO HTML -->
+    <img src="slipknot_icon_png (256×256)_5.jpg" alt="" class="fundo-imagem">
+  </div>
+  <div class="fundo-overlay" aria-hidden="true"></div>
+
+  <!-- BARRA SUPERIOR FIXA -->
+  <header class="topo">
+    <div class="topo-inner">
+      <a href="#inicio" class="marca">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <polygon points="12,2 22,19 2,19" stroke="#ff0015" stroke-width="2.2" />
+          <line x1="12" y1="6" x2="12" y2="19" stroke="#f4f4f5" stroke-width="1.6" />
+        </svg>
+        <span>Icaro João Dutra Ferreira</span>
+      </a>
+
+      <nav class="nav-acessos" aria-label="Acessos">
+        <button type="button" class="acesso-btn ativo" data-aba="objetivos" onclick="abrirAba('objetivos')">Objetivos</button>
+        <button type="button" class="acesso-btn" data-aba="qualificacoes" onclick="abrirAba('qualificacoes')">Qualificações</button>
+        <button type="button" class="acesso-btn" data-aba="formacao" onclick="abrirAba('formacao')">Formação — Cursos</button>
+        <button type="button" class="acesso-btn" data-aba="experiencia" onclick="abrirAba('experiencia')">Experiência</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="inicio">
+    <!-- TELA INICIAL -->
+    <div class="hero">
+      <div>
+        <div class="tag-pesada">16 anos • Perfil Profissional</div>
+        <h1>Icaro João<br><span>Dutra Ferreira.</span></h1>
+        <p class="subtitulo-hero">
+          Tenho <strong>16 anos</strong> e sou <strong>estudante de Técnico em Informática para Internet</strong>.
+        </p>
+        <div class="grupo-botoes-hero">
+          <button type="button" class="btn-outline" onclick="irParaAba('objetivos')">Objetivos</button>
+          <button type="button" class="btn-outline" onclick="irParaAba('qualificacoes')">Qualificações</button>
+          <button type="button" class="btn-outline" onclick="irParaAba('formacao')">Formação — Cursos</button>
+          <button type="button" class="btn-outline" onclick="irParaAba('experiencia')">Experiência</button>
+        </div>
+      </div>
+
+      <!-- ROSTO INTERATIVO -->
+      <div class="coluna-avatar">
+        <div class="ilustracao-box">
+          <div class="faixa-fundo"></div>
+          <svg id="avatar" class="avatar-svg" viewBox="0 0 230 250" fill="none" onclick="alternarExpressao()" title="Clica para mudar a expressão">
+            <path d="M35 242 C42 192, 78 176, 115 176 C152 176, 188 192, 195 242" fill="#141418" stroke="#ff0015" stroke-width="2.4" />
+            <path d="M90 178 L115 202 L140 178" stroke="#ff0015" stroke-width="2.2" fill="none" />
+
+            <rect x="98" y="146" width="34" height="34" rx="8" fill="#9c7a63" stroke="#18181b" stroke-width="2" />
+
+            <g id="cabeca-grupo">
+              <ellipse cx="64" cy="108" rx="8" ry="15" fill="#9c7a63" stroke="#18181b" stroke-width="2" />
+              <ellipse cx="166" cy="108" rx="8" ry="15" fill="#9c7a63" stroke="#18181b" stroke-width="2" />
+
+              <path d="M68 74 C68 54, 88 46, 115 46 C142 46, 162 54, 162 74 L158 118 C155 142, 134 156, 115 156 C96 156, 75 142, 72 118 Z" fill="#b48e74" stroke="#18181b" stroke-width="2.2" />
+
+              <path d="M72 96 L78 114 L73 128" stroke="#ff0015" stroke-width="2" fill="none" opacity="0.9" />
+              <path d="M158 96 L152 114 L157 128" stroke="#ff0015" stroke-width="2" fill="none" opacity="0.9" />
+
+              <path id="sobrancelha-esq" d="M78 83 Q92 77 105 83" stroke="#18181b" stroke-width="4.5" stroke-linecap="round" fill="none" />
+              <path id="sobrancelha-dir" d="M125 83 Q138 77 152 83" stroke="#18181b" stroke-width="4.5" stroke-linecap="round" fill="none" />
+
+              <ellipse cx="92" cy="95" rx="10" ry="6.5" fill="#f4f4f5" stroke="#18181b" stroke-width="1.8" />
+              <ellipse cx="138" cy="95" rx="10" ry="6.5" fill="#f4f4f5" stroke="#18181b" stroke-width="1.8" />
+              <circle id="pupila-esq" cx="92" cy="95" r="4.2" fill="#09090b" />
+              <circle id="pupila-dir" cx="138" cy="95" r="4.2" fill="#09090b" />
+              <circle cx="90.5" cy="93.5" r="1.4" fill="#ffffff" />
+              <circle cx="136.5" cy="93.5" r="1.4" fill="#ffffff" />
+
+              <path d="M115 88 L111 112 L119 115" stroke="#18181b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+              <path id="boca" d="M98 131 L132 131" stroke="#18181b" stroke-width="2.8" stroke-linecap="round" fill="none" />
+
+              <path d="M64 72 C66 36, 92 22, 115 22 C138 22, 164 36, 166 72 C144 62, 86 62, 64 72 Z" fill="#27272a" stroke="#ff0015" stroke-width="2" />
+              <path d="M54 72 C82 58, 148 58, 176 72 C154 78, 76 78, 54 72 Z" fill="#3f3f46" stroke="#18181b" stroke-width="2.2" />
+              <polygon points="115,34 126,48 115,58 104,48" fill="#18181b" stroke="#ff0015" stroke-width="1.5" />
+            </g>
+          </svg>
+        </div>
+        <div class="legenda-rosto">Move o rato ou clica no rosto para mudar a expressão</div>
+      </div>
+    </div>
+
+    <!-- ACESSOS INTERATIVOS -->
+    <section class="painel-acessos" id="acessos" aria-label="Informações do perfil">
+      <div class="abas-acesso">
+        <button type="button" class="acesso-btn ativo" data-aba="objetivos" onclick="abrirAba('objetivos')">Objetivos</button>
+        <button type="button" class="acesso-btn" data-aba="qualificacoes" onclick="abrirAba('qualificacoes')">Qualificações</button>
+        <button type="button" class="acesso-btn" data-aba="formacao" onclick="abrirAba('formacao')">Formação — Cursos</button>
+        <button type="button" class="acesso-btn" data-aba="experiencia" onclick="abrirAba('experiencia')">Experiência</button>
+      </div>
+
+      <div id="aba-objetivos" class="conteudo-aba ativa">
+        <h2>Informações Pessoais e Objetivos Profissionais</h2>
+        <p>
+          Busco oportunidade de emprego como jovem aprendiz ou estagiária, visando desenvolver habilidades profissionais e contribuir com dedicação e vontade de aprender para o crescimento da empresa.
+        </p>
+      </div>
+
+      <div id="aba-qualificacoes" class="conteudo-aba">
+        <h2>Qualificações</h2>
+        <p>
+          Facilidade em trabalhar em equipe e boa comunicação. Habilidade em organização e proatividade. Vontade de aprender e desenvolver novas competências, com disposição para adquirir conhecimentos. Conhecimento básico em digitalização de documentos e Excel.
+        </p>
+      </div>
+
+      <div id="aba-formacao" class="conteudo-aba">
+        <h2>FORMAÇÃO — CURSOS</h2>
+        <p>Ensino Médio em andamento — 2º ano — Escola Jacó Anderle.</p>
+        <p style="margin-top: 8px;">Curso Técnico em Informática para Internet — SENAI, em andamento.</p>
+      </div>
+
+      <div id="aba-experiencia" class="conteudo-aba">
+        <h2>Experiência</h2>
+        <p>
+          2026 — E.E.M. Jacó Anderle. Estágio administrativo — Concluído. Atendimento a clientes internos e externos pessoalmente e por telefone; organização de documentos e apoio em atividades administrativas.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESUMO COMPLETO EM CARDS -->
+    <section class="secao" id="detalhes">
+      <h2 class="titulo-secao">Resumo Profissional</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Objetivos</h3>
+          <p>
+            Busco oportunidade de emprego como jovem aprendiz ou estagiária, visando desenvolver habilidades profissionais e contribuir com dedicação e vontade de aprender para o crescimento da empresa.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Qualificações</h3>
+          <p>
+            Facilidade em trabalhar em equipe e boa comunicação. Habilidade em organização e proatividade. Vontade de aprender e desenvolver novas competências, com disposição para adquirir conhecimentos. Conhecimento básico em digitalização de documentos e Excel.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>FORMAÇÃO — CURSOS</h3>
+          <p>Ensino Médio em andamento — 2º ano — Escola Jacó Anderle.</p>
+          <p>Curso Técnico em Informática para Internet — SENAI, em andamento.</p>
+        </div>
+
+        <div class="card">
+          <h3>Experiência</h3>
+          <p>
+            2026 — E.E.M. Jacó Anderle. Estágio administrativo — Concluído. Atendimento a clientes internos e externos pessoalmente e por telefone; organização de documentos e apoio em atividades administrativas.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Icaro João Dutra Ferreira • 16 anos</span>
+    <span>Técnico em Informática para Internet</span>
+  </footer>
+
+  <script>
+    function abrirAba(nomeAba) {
+      const conteudos = document.querySelectorAll(".conteudo-aba");
+      conteudos.forEach((el) => el.classList.remove("ativa"));
+
+      const alvo = document.getElementById("aba-" + nomeAba);
+      if (alvo) {
+        alvo.classList.add("ativa");
+      }
+
+      const botoes = document.querySelectorAll(".acesso-btn");
+      botoes.forEach((btn) => {
+        btn.classList.toggle("ativo", btn.dataset.aba === nomeAba);
+      });
+    }
+
+    function irParaAba(nomeAba) {
+      abrirAba(nomeAba);
+      const painel = document.getElementById("acessos");
+      if (painel) {
+        painel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    const cabecaGrupo = document.getElementById("cabeca-grupo");
+    const pupilaEsq = document.getElementById("pupila-esq");
+    const pupilaDir = document.getElementById("pupila-dir");
+    const boca = document.getElementById("boca");
+    const sobrancelhaEsq = document.getElementById("sobrancelha-esq");
+    const sobrancelhaDir = document.getElementById("sobrancelha-dir");
+
+    let sorrindo = false;
+    let temporizadorParado;
+
+    function definirSorriso(ativo) {
+      sorrindo = ativo;
+      if (ativo) {
+        boca.setAttribute("d", "M98 130 Q115 141 132 130");
+        sobrancelhaEsq.setAttribute("d", "M78 81 Q92 75 105 81");
+        sobrancelhaDir.setAttribute("d", "M125 81 Q138 75 152 81");
+      } else {
+        boca.setAttribute("d", "M99 131 L131 131");
+        sobrancelhaEsq.setAttribute("d", "M78 83 Q92 79 105 84");
+        sobrancelhaDir.setAttribute("d", "M125 84 Q138 79 152 83");
+      }
+    }
+
+    function alternarExpressao() {
+      definirSorriso(!sorrindo);
+    }
+
+    window.addEventListener("mousemove", (e) => {
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      const rotY = nx * 8;
+      const rotX = -ny * 5;
+      const moveX = nx * 4;
+      const moveY = ny * 3;
+
+      cabecaGrupo.style.transform =
+        `translate(${moveX.toFixed(1)}px, ${moveY.toFixed(1)}px) rotate(${(rotY * 0.35).toFixed(1)}deg)`;
+
+      pupilaEsq.setAttribute("cx", (92 + rotY * 0.45).toFixed(1));
+      pupilaEsq.setAttribute("cy", (95 - rotX * 0.45).toFixed(1));
+
+      pupilaDir.setAttribute("cx", (138 + rotY * 0.45).toFixed(1));
+      pupilaDir.setAttribute("cy", (95 - rotX * 0.45).toFixed(1));
+
+      reiniciarInatividade();
+    }, { passive: true });
+
+    function reiniciarInatividade() {
+      clearTimeout(temporizadorParado);
+      temporizadorParado = setTimeout(() => {
+        definirSorriso(!sorrindo);
+      }, 5000);
+    }
+
+    reiniciarInatividade();
+  </script>
+</body>
+</html>
